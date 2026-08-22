@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gerador-qr-code.vercel.app/sitemap.xml
+Sitemap: https://gerador-qr-code-lake.vercel.app/sitemap.xml
+
