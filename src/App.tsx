@@ -113,7 +113,7 @@ export default function App() {
   
   // Inputs separados para cada tipo de conteúdo
   // 1. URL
-  const [urlInput, setUrlInput] = useState('https://gerador-qr-code.vercel.app/');
+  const [urlInput, setUrlInput] = useState('');
 
   // 2. PIX (Campos separados conforme padrão bancário)
   const [pixKeyType, setPixKeyType] = useState<'cpf' | 'cnpj' | 'email' | 'phone' | 'random'>('email');
@@ -139,7 +139,7 @@ export default function App() {
   const [plainText, setPlainText] = useState('');
 
   // Estado geral do QR Code
-  const [generatedContent, setGeneratedContent] = useState('https://gerador-qr-code.vercel.app/');
+  const [generatedContent, setGeneratedContent] = useState('');
   const [dataUrl, setDataUrl] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -170,14 +170,7 @@ export default function App() {
     } catch (e) {
       console.warn('Erro ao ler histórico:', e);
     }
-    return [
-      {
-        id: '1',
-        text: 'https://gerador-qr-code.vercel.app/',
-        type: 'url',
-        date: new Date().toISOString(),
-      },
-    ];
+    return [];
   });
 
   const toastTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -332,11 +325,6 @@ export default function App() {
       showToast,
     ]
   );
-
-  // Gerar QR Code inicial na montagem
-  useEffect(() => {
-    handleGenerate('https://gerador-qr-code.vercel.app/', 'url');
-  }, []);
 
   // Download QR Code PNG
   const handleDownload = () => {
