@@ -956,8 +956,17 @@ export default function App() {
               </div>
 
               {/* Prévia do Conteúdo Codificado */}
-              <div className="mt-3 max-w-md mx-auto text-xs text-slate-500 truncate font-mono bg-slate-100 py-1.5 px-3 rounded-lg border border-slate-200">
-                {generatedContent}
+              <div className="mt-3 max-w-md mx-auto text-left">
+                <div className="flex items-center justify-between text-[11px] font-medium text-slate-500 mb-1 px-1">
+                  <span className="inline-flex items-center gap-1">
+                    <QrCode className="w-3 h-3 text-sky-600" />
+                    <span>Conteúdo codificado no QR Code acima:</span>
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-mono">Em visualização</span>
+                </div>
+                <div className="text-xs text-slate-700 truncate font-mono bg-slate-100 py-2 px-3 rounded-lg border border-slate-200 shadow-2xs select-all">
+                  {generatedContent}
+                </div>
               </div>
 
               {/* Botões de Ação (Baixar PNG e Copiar Conteúdo) */}
