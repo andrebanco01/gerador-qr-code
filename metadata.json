@@ -1,0 +1,6 @@
+{
+  "name": "Gerador de QR Code",
+  "description": "Gerador de QR Code gratuito e online com suporte a PIX, WhatsApp, URLs e download em PNG de alta resolução.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
