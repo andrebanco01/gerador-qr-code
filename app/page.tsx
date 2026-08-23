@@ -340,7 +340,7 @@ export default function Page() {
             <div className="flex gap-6 text-sm">
               <a href="#" className="hover:text-white transition-colors">Política de Privacidade</a>
               <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
-              <a href="https://wa.me/5551991251325?text=Olá! Gostaria de conversar sobre sugestões ou oportunidades de negócios com o Gerador de QR Code." target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300 font-medium transition-colors flex items-center gap-1.5">
+              <a href="https://wa.me/5551991251325?text=Ol%C3%A1%21%20Gostaria%20de%20conversar%20sobre%20sugest%C3%B5es%20ou%20oportunidades%20de%20neg%C3%B3cios%20com%20o%20Gerador%20de%20QR%20Code." target="_blank" rel="noopener noreferrer" aria-label="Entrar em contato via WhatsApp" className="text-green-400 hover:text-green-300 font-medium transition-colors flex items-center gap-1.5">
                 <MessageCircle className="w-4 h-4" /> WhatsApp do Desenvolvedor
               </a>
             </div>
