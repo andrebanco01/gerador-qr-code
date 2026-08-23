@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gerador-qr-code-lake.vercel.app/sitemap.xml
+
