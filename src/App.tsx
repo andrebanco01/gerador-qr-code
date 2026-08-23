@@ -27,6 +27,7 @@ import {
   EyeOff,
 } from 'lucide-react';
 import { BannerSlot } from './components/BannerSlot';
+import { WhatsAppContact } from './components/WhatsAppContact';
 
 interface HistoryItem {
   id: string;
@@ -411,6 +412,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col items-center justify-between font-sans selection:bg-sky-500 selection:text-white">
+      {/* Botão flutuante de contato via WhatsApp do desenvolvedor */}
+      <WhatsAppContact
+        phoneNumber="5551991251325"
+        message="Olá! Gostaria de conversar sobre sugestões ou oportunidades de negócios com o Gerador de QR Code."
+        developerName="Desenvolvedor"
+      />
       {/* Toast Feedback */}
       {toast && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-4 py-2.5 rounded-full text-xs sm:text-sm font-medium shadow-xl flex items-center gap-2 border border-slate-700 animate-fade-in-up">
