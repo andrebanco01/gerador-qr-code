@@ -1,0 +1,6 @@
+{
+  "name": "Gerador de QR Code",
+  "description": "Gerador de QR Code Grátis com foco em SEO.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
