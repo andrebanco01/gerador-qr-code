@@ -170,6 +170,25 @@ export function useQRCode() {
     } catch {}
   }, [counter]);
 
+  // Auto-increment counter every 5s (simulates other users) and show toast every ~15s
+  useEffect(() => {
+    let tickCount = 0;
+    const interval = setInterval(() => {
+      const increment = Math.floor(Math.random() * 3) + 1; // 1-3
+      setCounter((prev) => prev + increment);
+      tickCount++;
+      // Show toast every 3rd tick (~15 seconds)
+      if (tickCount % 3 === 0) {
+        setCounter((prev) => {
+          const formatted = prev.toLocaleString('pt-BR');
+          showToast(`🟢 ${formatted}+ QR Codes gerados`);
+          return prev;
+        });
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [showToast]);
+
   const updateField = useCallback(
     <K extends keyof FormFields>(key: K, value: FormFields[K]) => {
       setFields((prev) => ({ ...prev, [key]: value }));
@@ -217,6 +236,7 @@ export function useQRCode() {
 
         setDataUrl(url);
         setGeneratedContent(content);
+
         setCounter((prev) => prev + 1);
 
         setHistory((prev) => {
@@ -229,8 +249,6 @@ export function useQRCode() {
           };
           return [newItem, ...filtered].slice(0, 10);
         });
-
-        showToast('QR Code gerado com sucesso!');
       } catch (err: any) {
         setError(`Erro ao gerar QR Code: ${err.message || 'Tente novamente.'}`);
       } finally {
