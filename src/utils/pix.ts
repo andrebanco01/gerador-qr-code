@@ -1,5 +1,6 @@
 /**
  * PIX EMV Payload Generator (BR Code / Banco Central do Brasil)
+ * Padrão oficial BACEN para PIX Estático.
  */
 
 function formatField(id: string, value: string): string {
@@ -7,7 +8,7 @@ function formatField(id: string, value: string): string {
   return `${id}${len}${value}`;
 }
 
-function crc16(str: string): string {
+export function crc16(str: string): string {
   let crc = 0xffff;
   for (let i = 0; i < str.length; i++) {
     crc ^= str.charCodeAt(i) << 8;
@@ -22,45 +23,61 @@ function crc16(str: string): string {
   return crc.toString(16).toUpperCase().padStart(4, '0');
 }
 
-export interface PixParams {
-  key: string;
-  name: string;
-  city: string;
-  amount?: string;
-  txId?: string;
-  description?: string;
+/**
+ * Remove acentos e normaliza string para ASCII puro (requisito BACEN).
+ */
+function stripAccents(str: string): string {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
 }
 
+export interface PixParams {
+  key: string;
+  name?: string;
+  city?: string;
+  amount?: string;
+  txid?: string;
+}
+
+/**
+ * Gera o payload PIX no formato BR Code EMV oficial do Banco Central.
+ * Compatível com todos os bancos brasileiros (Nubank, Itaú, Bradesco, Inter, Caixa, etc.)
+ */
 export function generatePixPayload({
   key,
   name,
   city,
   amount,
-  txId = '***',
-  description,
+  txid = '***',
 }: PixParams): string {
   const cleanKey = key.trim();
-  const cleanName = (name.trim() || 'RECEBEDOR').substring(0, 25);
-  const cleanCity = (city.trim() || 'BRASIL').substring(0, 15);
-  const cleanTxId = (txId.trim() || '***').substring(0, 25);
+  const cleanName = stripAccents((name || 'RECEBEDOR').trim()).substring(0, 25);
+  const cleanCity = stripAccents((city || 'SAO PAULO').trim()).substring(0, 15);
+  const cleanTxid = (txid || '***').trim().substring(0, 25) || '***';
 
-  let merchantInfo = formatField('00', 'br.gov.bcb.pix') + formatField('01', cleanKey);
-  if (description && description.trim()) {
-    merchantInfo += formatField('02', description.trim().substring(0, 40));
-  }
+  const merchantAccountInfo =
+    formatField('00', 'br.gov.bcb.pix') + formatField('01', cleanKey);
 
   let payload =
-    formatField('00', '01') + // Format Indicator
-    formatField('26', merchantInfo) + // Merchant Account Info
-    formatField('52', '0000') + // Merchant Category Code
-    formatField('53', '986') + // Currency: BRL
-    (amount && parseFloat(amount) > 0 ? formatField('54', parseFloat(amount).toFixed(2)) : '') +
-    formatField('58', 'BR') + // Country Code
-    formatField('59', cleanName) + // Beneficiary Name
-    formatField('60', cleanCity) + // Beneficiary City
-    formatField('62', formatField('05', cleanTxId)); // Additional Data (TxID)
+    formatField('00', '01') +
+    formatField('26', merchantAccountInfo) +
+    formatField('52', '0000') +
+    formatField('53', '986');
+
+  if (amount && parseFloat(amount) > 0) {
+    const formattedAmount = parseFloat(amount).toFixed(2);
+    payload += formatField('54', formattedAmount);
+  }
+
+  payload +=
+    formatField('58', 'BR') +
+    formatField('59', cleanName.toUpperCase()) +
+    formatField('60', cleanCity.toUpperCase()) +
+    formatField('62', formatField('05', cleanTxid));
 
   payload += '6304';
-  const checksum = crc16(payload);
-  return payload + checksum;
+  payload += crc16(payload);
+
+  return payload;
 }

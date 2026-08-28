@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://gerador-qr-code.vercel.app/sitemap.xml
