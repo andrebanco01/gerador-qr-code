@@ -14,6 +14,11 @@ import { FAQSection } from './components/FAQSection';
 import { ErrorAlert } from './components/ErrorAlert';
 import { BannerSlot } from './components/BannerSlot';
 import { WhatsAppContact } from './components/WhatsAppContact';
+import {
+  DEVELOPER_WHATSAPP,
+  DEVELOPER_WHATSAPP_MESSAGE,
+  AFFILIATE_URLS,
+} from './constants';
 
 export default function App() {
   const qr = useQRCode();
@@ -21,8 +26,8 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col items-center justify-between font-sans selection:bg-sky-500 selection:text-white">
       <WhatsAppContact
-        phoneNumber="5551991251325"
-        message="Olá! Gostaria de conversar sobre sugestões ou oportunidades de negócios com o Gerador de QR Code."
+        phoneNumber={DEVELOPER_WHATSAPP}
+        message={DEVELOPER_WHATSAPP_MESSAGE}
         developerName="Desenvolvedor"
       />
 
@@ -33,7 +38,7 @@ export default function App() {
           id="banner-slot-top"
           position="top"
           imageUrl="/bannertopo.jpg"
-          targetUrl="https://apretailer.com.br/click/69f971422bfa811fa651f598/184804/249927/"
+          targetUrl={AFFILIATE_URLS.top}
           badgeText="Oferta em Destaque"
           title="Promoções e Benefícios Exclusivos"
           subtitle="Aproveite condições especiais e descontos selecionados para você hoje."
@@ -72,10 +77,13 @@ export default function App() {
 
           <form onSubmit={(e) => { e.preventDefault(); qr.generate(); }} className="space-y-4">
             {qr.activeTab === 'url' && (
-              <UrlForm value={qr.fields.urlInput} onChange={(v) => qr.updateField('urlInput', v)} />
+              <div role="tabpanel" id="panel-url" aria-labelledby="tab-url">
+                <UrlForm value={qr.fields.urlInput} onChange={(v) => qr.updateField('urlInput', v)} />
+              </div>
             )}
 
             {qr.activeTab === 'pix' && (
+              <div role="tabpanel" id="panel-pix" aria-labelledby="tab-pix">
               <PixForm
                 keyType={qr.fields.pixKeyType}
                 onKeyTypeChange={(v) => qr.updateField('pixKeyType', v as any)}
@@ -90,9 +98,11 @@ export default function App() {
                 pixTxid={qr.fields.pixTxid}
                 onTxidChange={(v) => qr.updateField('pixTxid', v)}
               />
+              </div>
             )}
 
             {qr.activeTab === 'whatsapp' && (
+              <div role="tabpanel" id="panel-whatsapp" aria-labelledby="tab-whatsapp">
               <WhatsAppForm
                 countryCode={qr.fields.waCountryCode}
                 onCountryCodeChange={(v) => qr.updateField('waCountryCode', v)}
@@ -101,9 +111,11 @@ export default function App() {
                 message={qr.fields.waMessage}
                 onMessageChange={(v) => qr.updateField('waMessage', v)}
               />
+              </div>
             )}
 
             {qr.activeTab === 'wifi' && (
+              <div role="tabpanel" id="panel-wifi" aria-labelledby="tab-wifi">
               <WifiForm
                 ssid={qr.fields.wifiSsid}
                 onSsidChange={(v) => qr.updateField('wifiSsid', v)}
@@ -114,10 +126,14 @@ export default function App() {
                 hidden={qr.fields.wifiHidden}
                 onHiddenChange={(v) => qr.updateField('wifiHidden', v)}
               />
+              </div>
             )}
 
             {qr.activeTab === 'text' && (
-              <TextForm value={qr.fields.plainText} onChange={(v) => qr.updateField('plainText', v)} />
+              <div role="tabpanel" id="panel-text" aria-labelledby="tab-text">
+              <TextForm value={qr.fields.plainText}              onChange={(v) => qr.updateField('plainText', v)}
+            />
+              </div>
             )}
 
             {qr.error && <ErrorAlert message={qr.error} />}
@@ -163,7 +179,7 @@ export default function App() {
           id="banner-slot-middle"
           position="middle"
           imageUrl="/bannermeio.png"
-          targetUrl="https://apretailer.com.br/click/686b1a812bfa81137568adf2/183859/249927/"
+          targetUrl={AFFILIATE_URLS.middle}
           badgeText="Recomendação Especial"
           title="Oportunidades e Descontos Imperdíveis"
           subtitle="Explore produtos e serviços com as melhores condições e entrega garantida."

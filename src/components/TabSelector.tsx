@@ -43,17 +43,30 @@ const tabs: { id: TabType; label: string; icon: React.ElementType; activeClasses
 export const TabSelector: React.FC<TabSelectorProps> = ({ activeTab, onTabChange }) => {
   return (
     <div className="mb-6">
-      <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5">
+      <label
+        id="tab-label"
+        className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5"
+      >
         Escolha o Tipo de Conteúdo:
       </label>
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+      <div
+        role="tablist"
+        aria-labelledby="tab-label"
+        className="grid grid-cols-2 sm:grid-cols-5 gap-2"
+      >
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
+          const panelId = `panel-${tab.id}`;
           return (
             <button
               key={tab.id}
               type="button"
+              role="tab"
+              id={`tab-${tab.id}`}
+              aria-selected={isActive}
+              aria-controls={panelId}
+              tabIndex={isActive ? 0 : -1}
               onClick={() => onTabChange(tab.id)}
               className={`flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                 isActive

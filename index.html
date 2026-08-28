@@ -9,7 +9,6 @@
   <title>Gerador de QR Code Grátis | Crie QR Codes Online em Segundos</title>
   <meta name="title" content="Gerador de QR Code Grátis | Crie QR Codes Online em Segundos" />
   <meta name="description" content="Gerador de QR Code 100% grátis e online. Crie QR Codes para links, PIX, WhatsApp, Wi-Fi e textos. Baixe em alta resolução PNG sem cadastro e com total segurança." />
-  <meta name="keywords" content="gerador qr code, gerador de qr code, criar qr code, qr code pix, qr code whatsapp, qr code wifi, qr code gratis, qrcode download" />
   <meta name="robots" content="index, follow" />
   <meta name="language" content="Portuguese" />
   <meta name="author" content="Gerador de QR Code" />
@@ -20,7 +19,10 @@
   <meta property="og:url" content="https://gerador-qr-code-lake.vercel.app/" />
   <meta property="og:title" content="Gerador de QR Code Grátis | Crie QR Codes Online em Segundos" />
   <meta property="og:description" content="Crie QR Codes personalizados para sites, chaves PIX, WhatsApp, Wi-Fi e textos. 100% grátis, sem cadastro e com download em PNG." />
-  <meta property="og:image" content="https://gerador-qr-code-lake.vercel.app/og-image.png" />
+  <meta property="og:image" content="https://gerador-qr-code-lake.vercel.app/og-image.svg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Gerador de QR Code Grátis - PIX, WhatsApp, Wi-Fi, URL" />
   <meta property="og:site_name" content="Gerador de QR Code" />
   <meta property="og:locale" content="pt_BR" />
 
@@ -29,15 +31,22 @@
   <meta name="twitter:url" content="https://gerador-qr-code-lake.vercel.app/" />
   <meta name="twitter:title" content="Gerador de QR Code Grátis | Crie QR Codes Online em Segundos" />
   <meta name="twitter:description" content="Crie QR Codes personalizados para sites, chaves PIX, WhatsApp, Wi-Fi e textos. 100% grátis, sem cadastro e com download em PNG." />
-  <meta name="twitter:image" content="https://gerador-qr-code-lake.vercel.app/og-image.png" />
+  <meta name="twitter:image" content="https://gerador-qr-code-lake.vercel.app/og-image.svg" />
 
-  <!-- Favicon SVG -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%230f172a'/%3E%3Crect%20x='22'%20y='15'%20width='56'%20height='70'%20rx='8'%20fill='%231e293b'%20stroke='%2338bdf8'%20stroke-width='3'/%3E%3Crect%20x='30'%20y='24'%20width='40'%20height='46'%20rx='4'%20fill='%230284c7'/%3E%3Ccircle%20cx='50'%20cy='76'%20r='3.5'%20fill='%2338bdf8'/%3E%3Crect%20x='36'%20y='30'%20width='10'%20height='10'%20fill='%23ffffff'/%3E%3Crect%20x='54'%20y='30'%20width='10'%20height='10'%20fill='%23ffffff'/%3E%3Crect%20x='36'%20y='48'%20width='10'%20height='10'%20fill='%23ffffff'/%3E%3Crect%20x='54'%20y='48'%20width='10'%20height='10'%20fill='%23ffffff'/%3E%3Crect%20x='43'%20y='37'%20width='5'%20height='5'%20fill='%2338bdf8'/%3E%3Crect%20x='51'%20y='43'%20width='5'%20height='5'%20fill='%23ffffff'/%3E%3C/svg%3E" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0f172a" />
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts (async loading to avoid render-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+  </noscript>
 
   <!-- Schema.org JSON-LD (WebApplication & FAQPage) -->
   <script type="application/ld+json">
@@ -90,7 +99,7 @@
             "name": "Como criar um QR Code para receber pagamentos via PIX?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Selecione o atalho 'PIX', informe sua chave PIX e gere o código imediatamente para leitura em qualquer aplicativo de banco."
+              "text": "Selecione a aba PIX, informe sua chave, nome, cidade e opcionalmente o valor. O gerador cria o payload no formato oficial BR Code EMV do Banco Central, compatível com todos os bancos brasileiros."
             }
           },
           {
@@ -109,7 +118,21 @@
 </head>
 <body class="min-h-full bg-slate-50 text-slate-900 font-sans antialiased">
   <!-- React App Root -->
-  <div id="root"></div>
+  <div id="root">
+    <!-- noscript fallback for users with JavaScript disabled -->
+    <noscript>
+      <div style="max-width:600px;margin:80px auto;padding:2rem;text-align:center;font-family:system-ui,sans-serif;">
+        <h1 style="font-size:1.5rem;font-weight:700;margin-bottom:1rem;">Gerador de QR Code Online</h1>
+        <p style="color:#64748b;margin-bottom:1.5rem;">
+          Esta aplicação requer JavaScript habilitado para funcionar.
+          Por favor, ative o JavaScript nas configurações do seu navegador e recarregue a página.
+        </p>
+        <a href="https://gerador-qr-code-lake.vercel.app/" style="color:#0284c7;font-weight:600;">
+          Recarregar a página →
+        </a>
+      </div>
+    </noscript>
+  </div>
 
   <!-- Vite Entrypoint -->
   <script type="module" src="/src/main.tsx"></script>

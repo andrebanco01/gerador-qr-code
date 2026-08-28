@@ -40,7 +40,7 @@ export const BannerSlot: React.FC<BannerSlotProps> = ({
       <a
         href={isLinkActive ? targetUrl : undefined}
         target={isLinkActive ? '_blank' : undefined}
-        rel={isLinkActive ? 'noopener noreferrer' : undefined}
+        rel={isLinkActive ? 'noopener noreferrer sponsored' : undefined}
         className={`flex flex-col sm:flex-row items-center justify-between gap-3.5 p-3.5 sm:p-4 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-500 rounded-2xl`}
       >
         {/* Imagem Compacta / Ícone */}

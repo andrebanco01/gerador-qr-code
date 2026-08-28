@@ -1,0 +1,18 @@
+{
+  "name": "Gerador de QR Code Grátis",
+  "short_name": "QR Code",
+  "description": "Gerador de QR Code 100% grátis e online. Crie QR Codes para links, PIX, WhatsApp, Wi-Fi e textos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

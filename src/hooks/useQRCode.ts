@@ -57,10 +57,21 @@ function getValidationMessage(tab: TabType, fields: FormFields): string | null {
   switch (tab) {
     case 'url':
       return !fields.urlInput.trim() ? 'Por favor, informe a URL ou link do site.' : null;
-    case 'pix':
+    case 'pix': {
       if (!fields.pixKey.trim()) return 'Por favor, informe a chave PIX do beneficiário.';
       if (!fields.pixName.trim()) return 'Por favor, informe o nome do beneficiário do PIX.';
+      const key = fields.pixKey.trim();
+      const keyType = fields.pixKeyType;
+      const pixErrors: Record<string, string> = {
+        email: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(key) ? 'E-mail inválido. Use o formato: nome@dominio.com.br' : '',
+        cpf: !/^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/.test(key) ? 'CPF inválido. Use: 123.456.789-00' : '',
+        cnpj: !/^\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2}$/.test(key) ? 'CNPJ inválido. Use: 12.345.678/0001-00' : '',
+        phone: !/^\+?\d{10,15}$/.test(key.replace(/\D/g, '')) ? 'Telefone inválido. Use DDD + número (ex: 11999998888)' : '',
+      };
+      const pixError = pixErrors[keyType as string];
+      if (pixError) return pixError;
       return null;
+    }
     case 'whatsapp':
       return !fields.waPhone.replace(/\D/g, '') ? 'Por favor, digite o número do WhatsApp com DDD.' : null;
     case 'wifi':

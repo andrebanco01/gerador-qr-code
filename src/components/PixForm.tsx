@@ -36,9 +36,11 @@ export const PixForm: React.FC<PixFormProps> = ({
       ? 'ex: contato@seusite.com.br'
       : keyType === 'cpf'
         ? 'ex: 123.456.789-00'
-        : keyType === 'phone'
-          ? 'ex: 11999998888'
-          : 'ex: 123e4567-e89b-12d3-a456-426614174000';
+        : keyType === 'cnpj'
+          ? 'ex: 12.345.678/0001-00'
+          : keyType === 'phone'
+            ? 'ex: 11999998888'
+            : 'ex: 123e4567-e89b-12d3-a456-426614174000';
 
   return (
     <div className="p-4 bg-emerald-50/50 border border-emerald-200 rounded-xl space-y-3.5">
@@ -64,7 +66,8 @@ export const PixForm: React.FC<PixFormProps> = ({
             className="w-full px-3 py-2.5 bg-white border border-emerald-300 rounded-lg text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-800 cursor-pointer"
           >
             <option value="email">E-mail</option>
-            <option value="cpf">CPF / CNPJ</option>
+            <option value="cpf">CPF</option>
+            <option value="cnpj">CNPJ</option>
             <option value="phone">Telefone / Celular</option>
             <option value="random">Chave Aleatória (EVP)</option>
           </select>
