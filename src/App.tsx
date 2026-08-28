@@ -2,6 +2,7 @@ import React from 'react';
 import { QrCode, Sparkles, ShieldCheck, Zap, Globe } from 'lucide-react';
 import { useQRCode } from './hooks/useQRCode';
 import { Toast } from './components/Toast';
+import { Popup } from './components/Popup';
 import { TabSelector } from './components/TabSelector';
 import { UrlForm } from './components/UrlForm';
 import { PixForm } from './components/PixForm';
@@ -32,6 +33,7 @@ export default function App() {
       />
 
       <Toast message={qr.toast} />
+      <Popup message={qr.popup} onDone={qr.clearPopup} />
 
       <div className="w-full max-w-2xl px-4 pt-4 sm:pt-6">
         <BannerSlot

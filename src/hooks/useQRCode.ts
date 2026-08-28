@@ -148,6 +148,7 @@ export function useQRCode() {
   });
 
   const [toast, setToast] = useState<string | null>(null);
+  const [popup, setPopup] = useState<string | null>(null);
   const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showToast = useCallback((msg: string) => {
@@ -238,6 +239,7 @@ export function useQRCode() {
         setGeneratedContent(content);
 
         setCounter((prev) => prev + 1);
+        setPopup('QR Code gerado!');
 
         setHistory((prev) => {
           const filtered = prev.filter((item) => item.text !== content);
@@ -322,6 +324,8 @@ export function useQRCode() {
     error,
     setError,
     toast,
+    popup,
+    clearPopup: useCallback(() => setPopup(null), []),
     copySuccess,
     counter,
     history,
